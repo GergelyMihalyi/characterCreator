@@ -1,0 +1,42 @@
+### Create
+
+POST http://localhost:8080/api/characters/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Jane Doe2",
+  "age": 10,
+  "armorClass": 10,
+  "baseAttack": 10,
+  "healthPoint": 10
+}
+
+### Validaton
+POST http://localhost:8080/api/characters/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Afdsadsa"}
+
+###
+GET http://localhost:8080/api/characters/
+Accept: application/json
+
+###
+GET http://localhost:8080/api/characters/200
+Accept: application/json
+
+###
+PUT  http://localhost:8080/api/characters/2
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "javított"}
+
+###
+DELETE  http://localhost:8080/api/characters/2
+
+###
