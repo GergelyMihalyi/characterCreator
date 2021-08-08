@@ -1,6 +1,6 @@
 package dnd.character.creator.controller.character;
 
-import dnd.character.creator.validation.character.Violation;
+import dnd.character.creator.validation.Violation;
 import dnd.character.creator.exception.CharacterNotFoundException;
 import dnd.character.creator.service.character.DnDCharactersService;
 import dnd.character.creator.dto.character.DnDCharacterDto;
