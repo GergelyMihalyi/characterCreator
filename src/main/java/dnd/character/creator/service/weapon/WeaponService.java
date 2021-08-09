@@ -6,6 +6,7 @@ import dnd.character.creator.dto.character.UpdateCharacterCommand;
 import dnd.character.creator.dto.weapon.CreateWeaponCommand;
 import dnd.character.creator.dto.weapon.WeaponDto;
 import dnd.character.creator.exception.CharacterNotFoundException;
+import dnd.character.creator.exception.WeaponNotFoundException;
 import dnd.character.creator.repository.character.DnDCharacter;
 import dnd.character.creator.repository.character.DnDCharactersRepository;
 import dnd.character.creator.repository.weapon.Weapon;
@@ -37,6 +38,12 @@ public class WeaponService {
                 .filter(e -> prefix.isEmpty() || e.getName().toLowerCase().startsWith(prefix.get().toLowerCase()))
                 .map(e -> modelMapper.map(e, WeaponDto.class))
                 .collect(Collectors.toList());
+    }
+
+    public WeaponDto findWeaponById(long id) {
+        return modelMapper.map(repository.findById(id)
+                        .orElseThrow(() -> new WeaponNotFoundException("weapon not found")),
+                WeaponDto.class);
     }
 
 }
