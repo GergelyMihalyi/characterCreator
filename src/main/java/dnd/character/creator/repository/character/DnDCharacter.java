@@ -36,4 +36,9 @@ public class DnDCharacter {
         this.baseAttack = baseAttack;
         this.healthPoint = healthPoint;
     }
+
+    public DnDCharacter(String name, int healthPoint) {
+        this.name = name;
+        this.healthPoint = healthPoint;
+    }
 }
