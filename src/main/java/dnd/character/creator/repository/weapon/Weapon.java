@@ -18,6 +18,7 @@ public class Weapon {
     private Long id;
     private String name;
     @Column(name = "weapon_type")
+    @Enumerated(EnumType.STRING)
     private WeaponType weaponType;
     private int damage;
     private int weight;

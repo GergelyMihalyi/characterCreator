@@ -32,5 +32,12 @@ public class WeaponService {
         return modelMapper.map(weapon, WeaponDto.class);
     }
 
+    public List<WeaponDto> listWeapons(Optional<String> prefix) {
+        return repository.findAll().stream()
+                .filter(e -> prefix.isEmpty() || e.getName().toLowerCase().startsWith(prefix.get().toLowerCase()))
+                .map(e -> modelMapper.map(e, WeaponDto.class))
+                .collect(Collectors.toList());
+    }
+
 }
 
