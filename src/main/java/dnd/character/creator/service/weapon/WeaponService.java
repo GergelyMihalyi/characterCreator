@@ -4,6 +4,7 @@ import dnd.character.creator.dto.character.CreateDnDCharacterCommand;
 import dnd.character.creator.dto.character.DnDCharacterDto;
 import dnd.character.creator.dto.character.UpdateCharacterCommand;
 import dnd.character.creator.dto.weapon.CreateWeaponCommand;
+import dnd.character.creator.dto.weapon.UpdateWeaponCommand;
 import dnd.character.creator.dto.weapon.WeaponDto;
 import dnd.character.creator.exception.CharacterNotFoundException;
 import dnd.character.creator.exception.WeaponNotFoundException;
@@ -28,7 +29,7 @@ public class WeaponService {
     private WeaponRepository repository;
 
     public WeaponDto createWeapon(CreateWeaponCommand command) {
-        Weapon weapon = new Weapon(command.getName(),command.getWeaponType(),command.getDamage(),command.getWeight());
+        Weapon weapon = new Weapon(command.getName(), command.getWeaponType(), command.getDamage(), command.getWeight());
         repository.save(weapon);
         return modelMapper.map(weapon, WeaponDto.class);
     }
@@ -44,6 +45,13 @@ public class WeaponService {
         return modelMapper.map(repository.findById(id)
                         .orElseThrow(() -> new WeaponNotFoundException("weapon not found")),
                 WeaponDto.class);
+    }
+
+    @Transactional
+    public WeaponDto updateWeapon(long id, UpdateWeaponCommand command) {
+        Weapon weapon = repository.findById(id).orElseThrow(() -> new WeaponNotFoundException("character not found"));
+        weapon.setName(command.getName());
+        return modelMapper.map(weapon, WeaponDto.class);
     }
 
 }

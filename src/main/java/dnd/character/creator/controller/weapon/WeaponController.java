@@ -2,7 +2,9 @@ package dnd.character.creator.controller.weapon;
 
 
 import dnd.character.creator.dto.character.DnDCharacterDto;
+import dnd.character.creator.dto.character.UpdateCharacterCommand;
 import dnd.character.creator.dto.weapon.CreateWeaponCommand;
+import dnd.character.creator.dto.weapon.UpdateWeaponCommand;
 import dnd.character.creator.dto.weapon.WeaponDto;
 import dnd.character.creator.exception.CharacterNotFoundException;
 import dnd.character.creator.exception.WeaponNotFoundException;
@@ -55,6 +57,13 @@ public class WeaponController {
         return weaponService.listWeapons(prefix);
     }
 
+    @PutMapping("/{id}")
+    @Operation(summary = "updates a weapon")
+    @ApiResponse(responseCode = "200", description = "weapon has been updated")
+    public WeaponDto updateWeapon(@PathVariable("id") long id, @RequestBody UpdateWeaponCommand command) {
+        return weaponService.updateWeapon(id, command);
+    }
+
     @ExceptionHandler(WeaponNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Problem> handleNotFound(WeaponNotFoundException iae) {
@@ -69,7 +78,6 @@ public class WeaponController {
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(problem);
     }
-
 
 
 }

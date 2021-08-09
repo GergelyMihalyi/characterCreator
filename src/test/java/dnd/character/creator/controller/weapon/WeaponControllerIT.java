@@ -13,7 +13,9 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,5 +50,18 @@ class WeaponControllerIT {
         assertThat(employees)
                 .extracting(WeaponDto::getName)
                 .containsExactly("Test Weapon 1", "Test Weapon 2");
+    }
+
+    @Test
+    void testUpdateCharacter() {
+        WeaponDto weaponDto = testRestTemplate.postForObject("/api/weapons", new CreateWeaponCommand("Test Weapon 1", WeaponType.CRUSHING, 10, 10), WeaponDto.class);
+        long id = weaponDto.getId();
+        WeaponDto weaponDto2 = testRestTemplate.getForObject("/api/weapons/" + id, WeaponDto.class);
+        assertEquals("Test Weapon 1", weaponDto2.getName());
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("name", "Test Weapon 2");
+        testRestTemplate.put("/api/weapons/" + id, param);
+        WeaponDto weaponDto3 = testRestTemplate.getForObject("/api/weapons/" + id, WeaponDto.class);
+        assertEquals("Test Weapon 2", weaponDto3.getName());
     }
 }
