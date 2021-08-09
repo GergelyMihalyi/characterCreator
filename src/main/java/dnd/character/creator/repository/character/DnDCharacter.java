@@ -1,5 +1,6 @@
 package dnd.character.creator.repository.character;
 
+import dnd.character.creator.repository.weapon.Weapon;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,9 @@ public class DnDCharacter {
     private int baseAttack;
     @Column(name = "health_point")
     private int healthPoint;
+    @OneToOne
+    @JoinColumn(name = "weapon_id", referencedColumnName = "id")
+    private Weapon weapon;
 
     public DnDCharacter(String name, int age, int armorClass, int baseAttack, int healthPoint) {
         this.name = name;
