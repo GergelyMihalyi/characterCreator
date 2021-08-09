@@ -27,7 +27,7 @@ public class CreateDnDCharacterCommand {
     private int armorClass;
     @Schema(description = "base attack modifier of the character", example = "10")
     @Min(value=10, message="positive number, min 10 is required")
-    @Max(value=20, message="positive number, max 150")
+    @Max(value=20, message="positive number, max 20")
     private int baseAttack;
     @Schema(description = "max health point of the character", example = "100")
     @Min(value=50, message="positive number, min 50 is required")
