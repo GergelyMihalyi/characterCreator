@@ -1,12 +1,8 @@
 package dnd.character.creator.controller.weapon;
 
-
-import dnd.character.creator.dto.character.DnDCharacterDto;
-import dnd.character.creator.dto.character.UpdateCharacterCommand;
 import dnd.character.creator.dto.weapon.CreateWeaponCommand;
 import dnd.character.creator.dto.weapon.UpdateWeaponCommand;
 import dnd.character.creator.dto.weapon.WeaponDto;
-import dnd.character.creator.exception.CharacterNotFoundException;
 import dnd.character.creator.exception.WeaponNotFoundException;
 import dnd.character.creator.service.weapon.WeaponService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -62,6 +58,14 @@ public class WeaponController {
     @ApiResponse(responseCode = "200", description = "weapon has been updated")
     public WeaponDto updateWeapon(@PathVariable("id") long id, @RequestBody UpdateWeaponCommand command) {
         return weaponService.updateWeapon(id, command);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "deletes a weapon")
+    @ApiResponse(responseCode = "204", description = "weapon has been deleted")
+    public void deleteWeapon(@PathVariable("id") long id) {
+        weaponService.deleteWeapon(id);
     }
 
     @ExceptionHandler(WeaponNotFoundException.class)

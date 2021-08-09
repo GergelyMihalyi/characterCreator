@@ -1,15 +1,9 @@
 package dnd.character.creator.service.weapon;
 
-import dnd.character.creator.dto.character.CreateDnDCharacterCommand;
-import dnd.character.creator.dto.character.DnDCharacterDto;
-import dnd.character.creator.dto.character.UpdateCharacterCommand;
 import dnd.character.creator.dto.weapon.CreateWeaponCommand;
 import dnd.character.creator.dto.weapon.UpdateWeaponCommand;
 import dnd.character.creator.dto.weapon.WeaponDto;
-import dnd.character.creator.exception.CharacterNotFoundException;
 import dnd.character.creator.exception.WeaponNotFoundException;
-import dnd.character.creator.repository.character.DnDCharacter;
-import dnd.character.creator.repository.character.DnDCharactersRepository;
 import dnd.character.creator.repository.weapon.Weapon;
 import dnd.character.creator.repository.weapon.WeaponRepository;
 import lombok.AllArgsConstructor;
@@ -52,6 +46,10 @@ public class WeaponService {
         Weapon weapon = repository.findById(id).orElseThrow(() -> new WeaponNotFoundException("character not found"));
         weapon.setName(command.getName());
         return modelMapper.map(weapon, WeaponDto.class);
+    }
+
+    public void deleteWeapon(long id) {
+        repository.deleteById(id);
     }
 
 }

@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.HashMap;
@@ -63,5 +65,17 @@ class WeaponControllerIT {
         testRestTemplate.put("/api/weapons/" + id, param);
         WeaponDto weaponDto3 = testRestTemplate.getForObject("/api/weapons/" + id, WeaponDto.class);
         assertEquals("Test Weapon 2", weaponDto3.getName());
+    }
+
+    @Test
+    void testDeleteCharacter() {
+        WeaponDto weaponDto = testRestTemplate.postForObject("/api/weapons", new CreateWeaponCommand("Test Weapon 1", WeaponType.CRUSHING, 10, 10), WeaponDto.class);
+        long id = weaponDto.getId();
+        WeaponDto weaponDto2 = testRestTemplate.getForObject("/api/weapons/" + id, WeaponDto.class);
+        assertEquals("Test Weapon 1", weaponDto2.getName());
+        testRestTemplate.delete("/api/weapons/" + id);
+        ResponseEntity<String> response = testRestTemplate.
+                getForEntity("/api/weapons/" + id, String.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 }
