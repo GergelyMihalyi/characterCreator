@@ -9,5 +9,5 @@ public class DnDCharacterDto {
     private int age;
     private int armorClass;
     private int baseAttack;
-    private int healthPoints;
+    private int healthPoint;
 }
