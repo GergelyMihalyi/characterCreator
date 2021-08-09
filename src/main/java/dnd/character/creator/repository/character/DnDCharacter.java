@@ -25,10 +25,6 @@ public class DnDCharacter {
     @Column(name = "health_point")
     private int healthPoint;
 
-    public DnDCharacter(String name) {
-        this.name = name;
-    }
-
     public DnDCharacter(String name, int age, int armorClass, int baseAttack, int healthPoint) {
         this.name = name;
         this.age = age;
