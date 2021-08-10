@@ -29,7 +29,7 @@ class WeaponControllerIT {
     TestRestTemplate testRestTemplate;
 
     @Test
-    void testCreateCharacters() {
+    void testCreateWeapon() {
         WeaponDto weaponDto =
                 testRestTemplate.postForObject("/api/weapons", new CreateWeaponCommand("Test", WeaponType.CRUSHING, 10, 10), WeaponDto.class);
         assertEquals("Test", weaponDto.getName());
@@ -55,7 +55,7 @@ class WeaponControllerIT {
     }
 
     @Test
-    void testUpdateCharacter() {
+    void testUpdateWeapon() {
         WeaponDto weaponDto = testRestTemplate.postForObject("/api/weapons", new CreateWeaponCommand("Test Weapon 1", WeaponType.CRUSHING, 10, 10), WeaponDto.class);
         long id = weaponDto.getId();
         WeaponDto weaponDto2 = testRestTemplate.getForObject("/api/weapons/" + id, WeaponDto.class);
@@ -68,7 +68,7 @@ class WeaponControllerIT {
     }
 
     @Test
-    void testDeleteCharacter() {
+    void testDeleteWeapon() {
         WeaponDto weaponDto = testRestTemplate.postForObject("/api/weapons", new CreateWeaponCommand("Test Weapon 1", WeaponType.CRUSHING, 10, 10), WeaponDto.class);
         long id = weaponDto.getId();
         WeaponDto weaponDto2 = testRestTemplate.getForObject("/api/weapons/" + id, WeaponDto.class);

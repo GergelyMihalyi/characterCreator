@@ -81,12 +81,12 @@ class DnDCharactersControllerIT {
     }
 
     @Test
-    void testCreateAndAssignWeapon() {
+    void testCreateAndAssignItem() {
         DnDCharacterDto dnDCharacterDto1 = testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10, 10, 60), DnDCharacterDto.class);
         long id1 = dnDCharacterDto1.getId();
-        DnDCharacterDto dnDCharacterDto2 = testRestTemplate.postForObject("/api/characters/" + id1 + "/items", new CreateItemCommand("Test Weapon", "Test Description"), DnDCharacterDto.class);
+        DnDCharacterDto dnDCharacterDto2 = testRestTemplate.postForObject("/api/characters/" + id1 + "/items", new CreateItemCommand("Test Item", "Test Description"), DnDCharacterDto.class);
         List<ItemDto> items = dnDCharacterDto2.getItems();
-        assertEquals("Test Weapon", items.get(0).getName());
+        assertEquals("Test Item", items.get(0).getName());
     }
 
 }
