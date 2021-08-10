@@ -1,6 +1,9 @@
 package dnd.character.creator.dto.character;
 
+import dnd.character.creator.dto.item.ItemDto;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class DnDCharacterDto {
@@ -10,4 +13,5 @@ public class DnDCharacterDto {
     private int armorClass;
     private int baseAttack;
     private int healthPoint;
+    private List<ItemDto> items;
 }

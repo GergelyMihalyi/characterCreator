@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/weapons")
-@Tag(name = "Operations on characters")
+@Tag(name = "Operations on weapons")
 public class WeaponController {
 
     private WeaponService weaponService;

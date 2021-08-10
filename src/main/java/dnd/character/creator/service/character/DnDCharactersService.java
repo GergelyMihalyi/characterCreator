@@ -2,10 +2,14 @@ package dnd.character.creator.service.character;
 
 import dnd.character.creator.dto.character.CreateDnDCharacterCommand;
 import dnd.character.creator.dto.character.UpdateCharacterCommand;
+import dnd.character.creator.dto.character.UpdateWithExistingItemCommand;
+import dnd.character.creator.dto.item.CreateItemCommand;
 import dnd.character.creator.exception.CharacterNotFoundException;
 import dnd.character.creator.repository.character.DnDCharacter;
 import dnd.character.creator.dto.character.DnDCharacterDto;
 import dnd.character.creator.repository.character.DnDCharactersRepository;
+import dnd.character.creator.repository.item.Item;
+import dnd.character.creator.repository.item.ItemsRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -21,6 +25,7 @@ public class DnDCharactersService {
 
     private ModelMapper modelMapper;
     private DnDCharactersRepository repository;
+    private ItemsRepository itemsRepository;
 
     public List<DnDCharacterDto> listCharacters(Optional<String> prefix) {
         return repository.findAll().stream()
@@ -45,6 +50,22 @@ public class DnDCharactersService {
     public DnDCharacterDto updateCharacter(long id, UpdateCharacterCommand command) {
         DnDCharacter character = repository.findById(id).orElseThrow(() -> new CharacterNotFoundException("character not found"));
         character.setName(command.getName());
+        return modelMapper.map(character, DnDCharacterDto.class);
+    }
+
+    public DnDCharacterDto createAndAssignItem(long id, CreateItemCommand command) {
+        DnDCharacter character = repository.findById(id).orElseThrow(() -> new CharacterNotFoundException("character not found"));
+        Item item = new Item(command.getName(), command.getDescription());
+        item.getCharacters().add(character);
+        itemsRepository.save(item);
+        return modelMapper.map(character, DnDCharacterDto.class);
+    }
+
+    public DnDCharacterDto updateCharacterWithExistingItem(long id, UpdateWithExistingItemCommand command) {
+        DnDCharacter character = repository.findById(id).orElseThrow(() -> new CharacterNotFoundException("character not found"));
+        Item item = itemsRepository.findById(command.getItemId()).orElseThrow(() -> new CharacterNotFoundException("item found"));
+        item.getCharacters().add(character);
+        itemsRepository.save(item);
         return modelMapper.map(character, DnDCharacterDto.class);
     }
 

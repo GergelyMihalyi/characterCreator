@@ -1,5 +1,7 @@
 package dnd.character.creator.controller.character;
 
+import dnd.character.creator.dto.character.UpdateWithExistingItemCommand;
+import dnd.character.creator.dto.item.CreateItemCommand;
 import dnd.character.creator.validation.Violation;
 import dnd.character.creator.exception.CharacterNotFoundException;
 import dnd.character.creator.service.character.DnDCharactersService;
@@ -70,6 +72,21 @@ public class DnDCharactersController {
     @ApiResponse(responseCode = "204", description = "character has been deleted")
     public void deleteCharacter(@PathVariable("id") long id) {
         characterService.deleteCharacter(id);
+    }
+
+    @PostMapping("/{id}/items")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "creates a item and assigned to the character")
+    @ApiResponse(responseCode = "201", description = "item has been created and assigned to character")
+    public DnDCharacterDto createItemToCharacter(@PathVariable("id") long id,@Valid @RequestBody CreateItemCommand command){
+        return characterService.createAndAssignItem(id,command);
+    }
+
+    @PutMapping("/{id}/items")
+    @Operation(summary = "assign a item to the character")
+    @ApiResponse(responseCode = "200", description = "assigned a item to the character")
+    public DnDCharacterDto updateCharacterWithExistingItem(@PathVariable("id") long id, @RequestBody UpdateWithExistingItemCommand command) {
+        return characterService.updateCharacterWithExistingItem(id, command);
     }
 
     @ExceptionHandler(CharacterNotFoundException.class)

@@ -1,11 +1,16 @@
 package dnd.character.creator.repository.character;
 
+import dnd.character.creator.repository.item.Item;
 import dnd.character.creator.repository.weapon.Weapon;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -28,6 +33,8 @@ public class DnDCharacter {
     @OneToOne
     @JoinColumn(name = "weapon_id", referencedColumnName = "id")
     private Weapon weapon;
+    @ManyToMany(mappedBy = "characters")
+    private List<Item> items = new ArrayList<>();
 
     public DnDCharacter(String name, int age, int armorClass, int baseAttack, int healthPoint) {
         this.name = name;
