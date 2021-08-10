@@ -1,8 +1,8 @@
 package dnd.character.creator.service.item;
 
-import dnd.character.creator.dto.character.UpdateCharacterCommand;
 import dnd.character.creator.dto.item.CreateItemCommand;
 import dnd.character.creator.dto.item.ItemDto;
+import dnd.character.creator.dto.item.UpdateItemCommand;
 import dnd.character.creator.exception.ItemNotFoundException;
 import dnd.character.creator.repository.item.Item;
 import dnd.character.creator.repository.item.ItemsRepository;
@@ -42,7 +42,7 @@ public class ItemService {
     }
 
     @Transactional
-    public ItemDto updateItem(long id, UpdateCharacterCommand command) {
+    public ItemDto updateItem(long id, UpdateItemCommand command) {
         Item item = repository.findById(id).orElseThrow(() -> new ItemNotFoundException("item not found"));
         item.setName(command.getName());
         return modelMapper.map(item, ItemDto.class);
