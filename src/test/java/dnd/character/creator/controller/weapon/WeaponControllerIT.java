@@ -1,7 +1,5 @@
 package dnd.character.creator.controller.weapon;
 
-import dnd.character.creator.dto.character.CreateDnDCharacterCommand;
-import dnd.character.creator.dto.character.DnDCharacterDto;
 import dnd.character.creator.dto.weapon.CreateWeaponCommand;
 import dnd.character.creator.dto.weapon.WeaponDto;
 import dnd.character.creator.repository.weapon.WeaponType;
@@ -60,7 +58,7 @@ class WeaponControllerIT {
         long id = weaponDto.getId();
         WeaponDto weaponDto2 = testRestTemplate.getForObject("/api/weapons/" + id, WeaponDto.class);
         assertEquals("Test Weapon 1", weaponDto2.getName());
-        Map<String, String> param = new HashMap<String, String>();
+        Map<String, String> param = new HashMap<>();
         param.put("name", "Test Weapon 2");
         testRestTemplate.put("/api/weapons/" + id, param);
         WeaponDto weaponDto3 = testRestTemplate.getForObject("/api/weapons/" + id, WeaponDto.class);

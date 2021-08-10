@@ -1,10 +1,12 @@
 package dnd.character.creator.repository.weapon;
 
+import dnd.character.creator.repository.character.DnDCharacter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,6 +24,8 @@ public class Weapon {
     private WeaponType weaponType;
     private int damage;
     private int weight;
+    @OneToMany(mappedBy="weapon")
+    private List<DnDCharacter> characters;
 
     public Weapon(String name, WeaponType weaponType, int damage, int weight) {
         this.name = name;

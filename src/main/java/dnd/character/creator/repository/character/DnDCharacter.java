@@ -30,7 +30,7 @@ public class DnDCharacter {
     private int baseAttack;
     @Column(name = "health_point")
     private int healthPoint;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "weapon_id", referencedColumnName = "id")
     private Weapon weapon;
     @ManyToMany(mappedBy = "characters")

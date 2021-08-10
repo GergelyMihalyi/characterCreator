@@ -1,13 +1,11 @@
 package dnd.character.creator.controller.character;
 
-import dnd.character.creator.dto.character.UpdateWithExistingItemCommand;
+import dnd.character.creator.dto.character.*;
 import dnd.character.creator.dto.item.CreateItemCommand;
+import dnd.character.creator.dto.weapon.CreateWeaponCommand;
 import dnd.character.creator.validation.Violation;
 import dnd.character.creator.exception.CharacterNotFoundException;
 import dnd.character.creator.service.character.DnDCharactersService;
-import dnd.character.creator.dto.character.DnDCharacterDto;
-import dnd.character.creator.dto.character.CreateDnDCharacterCommand;
-import dnd.character.creator.dto.character.UpdateCharacterCommand;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -87,6 +85,22 @@ public class DnDCharactersController {
     @ApiResponse(responseCode = "200", description = "assigned a item to the character")
     public DnDCharacterDto updateCharacterWithExistingItem(@PathVariable("id") long id, @RequestBody UpdateWithExistingItemCommand command) {
         return characterService.updateCharacterWithExistingItem(id, command);
+    }
+
+
+    @PostMapping("/{id}/weapons")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "creates a weapon and assigned to the character")
+    @ApiResponse(responseCode = "201", description = "item has been created and assigned to character")
+    public DnDCharacterDto createWeaponToCharacter(@PathVariable("id") long id,@Valid @RequestBody CreateWeaponCommand command){
+        return characterService.createAndAssignWeapon(id,command);
+    }
+
+    @PutMapping("/{id}/weapons")
+    @Operation(summary = "assign a weapon to the character")
+    @ApiResponse(responseCode = "200", description = "assigned a weapon to the character")
+    public DnDCharacterDto updateCharacterWithExistingWeapon(@PathVariable("id") long id, @RequestBody UpdateWithExistingWeaponCommand command) {
+        return characterService.updateCharacterWithExistingWeapon(id, command);
     }
 
     @ExceptionHandler(CharacterNotFoundException.class)

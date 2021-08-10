@@ -1,15 +1,15 @@
 package dnd.character.creator.service.character;
 
-import dnd.character.creator.dto.character.CreateDnDCharacterCommand;
-import dnd.character.creator.dto.character.UpdateCharacterCommand;
-import dnd.character.creator.dto.character.UpdateWithExistingItemCommand;
+import dnd.character.creator.dto.character.*;
 import dnd.character.creator.dto.item.CreateItemCommand;
+import dnd.character.creator.dto.weapon.CreateWeaponCommand;
 import dnd.character.creator.exception.CharacterNotFoundException;
 import dnd.character.creator.repository.character.DnDCharacter;
-import dnd.character.creator.dto.character.DnDCharacterDto;
 import dnd.character.creator.repository.character.DnDCharactersRepository;
 import dnd.character.creator.repository.item.Item;
 import dnd.character.creator.repository.item.ItemsRepository;
+import dnd.character.creator.repository.weapon.Weapon;
+import dnd.character.creator.repository.weapon.WeaponRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -26,6 +26,7 @@ public class DnDCharactersService {
     private ModelMapper modelMapper;
     private DnDCharactersRepository repository;
     private ItemsRepository itemsRepository;
+    private WeaponRepository weaponRepository;
 
     public List<DnDCharacterDto> listCharacters(Optional<String> prefix) {
         return repository.findAll().stream()
@@ -74,5 +75,20 @@ public class DnDCharactersService {
     }
 
 
+    public DnDCharacterDto createAndAssignWeapon(long id, CreateWeaponCommand command) {
+        DnDCharacter character = repository.findById(id).orElseThrow(() -> new CharacterNotFoundException("character not found"));
+        Weapon weapon = new Weapon(command.getName(), command.getWeaponType(),command.getDamage(),command.getWeight());
+        character.setWeapon(weapon);
+        repository.save(character);
+        return modelMapper.map(character, DnDCharacterDto.class);
+    }
+
+    public DnDCharacterDto updateCharacterWithExistingWeapon(long id, UpdateWithExistingWeaponCommand command) {
+        DnDCharacter character = repository.findById(id).orElseThrow(() -> new CharacterNotFoundException("character not found"));
+        Weapon weapon =  weaponRepository.findById(command.getWeaponId()).orElseThrow(() -> new CharacterNotFoundException("item found"));
+        character.setWeapon(weapon);
+        repository.save(character);
+        return modelMapper.map(character, DnDCharacterDto.class);
+    }
 }
 
