@@ -1,7 +1,9 @@
 package dnd.character.creator.characters.controller;
 
+import dnd.character.creator.characterClasses.dto.CreateCharacterClassCommand;
 import dnd.character.creator.characters.dto.*;
 import dnd.character.creator.items.dto.CreateItemCommand;
+import dnd.character.creator.races.dto.CreateRaceCommand;
 import dnd.character.creator.weapons.dto.CreateWeaponCommand;
 import dnd.character.creator.characters.validation.Violation;
 import dnd.character.creator.characters.exception.CharacterNotFoundException;
@@ -87,7 +89,6 @@ public class DnDCharactersController {
         return characterService.updateCharacterWithExistingItem(id, command);
     }
 
-
     @PostMapping("/{id}/weapons")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "creates a weapon and assigned to the character")
@@ -101,6 +102,44 @@ public class DnDCharactersController {
     @ApiResponse(responseCode = "200", description = "assigned a weapon to the character")
     public DnDCharacterDto updateCharacterWithExistingWeapon(@PathVariable("id") long id, @RequestBody UpdateWithExistingWeaponCommand command) {
         return characterService.updateCharacterWithExistingWeapon(id, command);
+    }
+
+    @PostMapping("/{id}/classes")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "creates a class and assigned to the character")
+    @ApiResponse(responseCode = "201", description = "class has been created and assigned to character")
+    public DnDCharacterDto createCharacterClassToCharacter(@PathVariable("id") long id, @Valid @RequestBody CreateCharacterClassCommand command){
+        return characterService.createAndAssignClass(id,command);
+    }
+
+    @PutMapping("/{id}/classes")
+    @Operation(summary = "assign a race to the character")
+    @ApiResponse(responseCode = "200", description = "assigned a class to the character")
+    public DnDCharacterDto updateCharacterWithExistingCharacterClass(@PathVariable("id") long id, @RequestBody UpdateWithExistingClassCommand command) {
+        return characterService.updateCharacterWithExistingClass(id, command);
+    }
+
+    @PostMapping("/{id}/races")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "creates a class and assigned to the character")
+    @ApiResponse(responseCode = "201", description = "races has been created and assigned to character")
+    public DnDCharacterDto createRaceToCharacter(@PathVariable("id") long id, @Valid @RequestBody CreateRaceCommand command){
+        return characterService.createAndAssignRace(id,command);
+    }
+
+    @PutMapping("/{id}/races")
+    @Operation(summary = "assign a race to the character")
+    @ApiResponse(responseCode = "200", description = "assigned a race to the character")
+    public DnDCharacterDto updateCharacterWithExistingRace(@PathVariable("id") long id, @RequestBody UpdateWithExistingRaceCommand command) {
+        return characterService.updateCharacterWithExistingRace(id, command);
+    }
+
+    @PostMapping("/{id}/level")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "character level up ( +10dmg, +10hp)")
+    @ApiResponse(responseCode = "201", description = "character level up ( +10dmg, +10hp)")
+    public DnDCharacterDto characterLevelUp(@PathVariable("id") long id){
+        return characterService.levelUp(id);
     }
 
     @ExceptionHandler(CharacterNotFoundException.class)

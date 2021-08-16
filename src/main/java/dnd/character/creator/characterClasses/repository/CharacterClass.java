@@ -1,10 +1,12 @@
 package dnd.character.creator.characterClasses.repository;
 
+import dnd.character.creator.characters.repository.DnDCharacter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,6 +23,8 @@ public class CharacterClass {
     private int healthPoint;
     @Column(name = "attack_damage")
     private int attackDamage;
+    @OneToMany(mappedBy="characterClass")
+    private List<DnDCharacter> characters;
 
     public CharacterClass(String name, int healthPoint, int attackDamage) {
         this.name = name;

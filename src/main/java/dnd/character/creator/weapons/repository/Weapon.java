@@ -1,7 +1,6 @@
 package dnd.character.creator.weapons.repository;
 
 import dnd.character.creator.characters.repository.DnDCharacter;
-import dnd.character.creator.weapons.repository.WeaponType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

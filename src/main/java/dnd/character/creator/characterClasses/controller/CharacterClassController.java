@@ -35,7 +35,7 @@ public class CharacterClassController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "creates a weapon")
+    @Operation(summary = "creates a character class")
     @ApiResponse(responseCode = "201", description = "class has been created")
     public CharacterClassDto createCharacterClass(@Valid @RequestBody
     CreateCharacterClassCommand command) {
@@ -43,21 +43,21 @@ public class CharacterClassController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "find a weapon by id")
-    @ApiResponse(responseCode = "200", description = "class has been found")
+    @Operation(summary = "find a character class by id")
+    @ApiResponse(responseCode = "200", description = "character class has been found")
     public CharacterClassDto findCharacterById(@PathVariable("id") long id) {
         return service.findCharacterClassById(id);
     }
 
     @GetMapping
-    @Operation(summary = "list all weapons")
+    @Operation(summary = "list all character class")
     @ApiResponse(responseCode = "200", description = "all classes have been listed")
     public List<CharacterClassDto> listCharactersClass(@RequestParam Optional<String> prefix) {
         return service.listCharacterClass(prefix);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "updates a weapon")
+    @Operation(summary = "updates a character class")
     @ApiResponse(responseCode = "200", description = "classes has been updated")
     public CharacterClassDto updateCharacterClass(@PathVariable("id") long id, @RequestBody UpdateCharacterClassCommand command) {
         return service.updateCharacterClass(id, command);
@@ -65,8 +65,8 @@ public class CharacterClassController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "deletes a class")
-    @ApiResponse(responseCode = "204", description = "class has been deleted")
+    @Operation(summary = "deletes a character class")
+    @ApiResponse(responseCode = "204", description = "character class has been deleted")
     public void deleteCharacterClass(@PathVariable("id") long id) {
         service.deleteCharacterClass(id);
     }

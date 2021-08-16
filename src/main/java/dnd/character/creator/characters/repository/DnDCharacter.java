@@ -2,6 +2,7 @@ package dnd.character.creator.characters.repository;
 
 import dnd.character.creator.characterClasses.repository.CharacterClass;
 import dnd.character.creator.items.repository.Item;
+import dnd.character.creator.races.repository.Race;
 import dnd.character.creator.weapons.repository.Weapon;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,6 +42,9 @@ public class DnDCharacter {
     @ManyToOne
     @JoinColumn(name = "class_id", referencedColumnName = "id")
     private CharacterClass characterClass;
+    @ManyToOne
+    @JoinColumn(name = "race_id", referencedColumnName = "id")
+    private Race race;
 
     public DnDCharacter(String name, int age, int baseAttackDamage, int baseHealthPoint) {
         this.name = name;
@@ -48,14 +52,12 @@ public class DnDCharacter {
         this.baseAttackDamage = baseAttackDamage;
         this.baseHealthPoint = baseHealthPoint;
         this.actualHealthPoint = baseHealthPoint;
-        this.experience = 0;
         this.level = 1;
     }
 
-    public DnDCharacter(String name, int baseHealthPoint) {
-        this.name = name;
-        this.baseHealthPoint = baseHealthPoint;
-        this.experience = 0;
-        this.level = 1;
+    public void levelUp(){
+        level += 1;
+        baseHealthPoint +=10;
+        baseAttackDamage +=10;
     }
 }
