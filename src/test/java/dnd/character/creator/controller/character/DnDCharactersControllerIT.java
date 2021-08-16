@@ -34,18 +34,17 @@ class DnDCharactersControllerIT {
     @Test
     void testCreateCharacters() {
         DnDCharacterDto dnDCharacterDto =
-                testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10, 10, 60), DnDCharacterDto.class);
+                testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10,  60), DnDCharacterDto.class);
         assertEquals("Test", dnDCharacterDto.getName());
         assertEquals(10, dnDCharacterDto.getAge());
-        assertEquals(10, dnDCharacterDto.getArmorClass());
-        assertEquals(10, dnDCharacterDto.getBaseAttack());
-        assertEquals(60, dnDCharacterDto.getHealthPoint());
+        assertEquals(10, dnDCharacterDto.getBaseAttackDamage());
+        assertEquals(60, dnDCharacterDto.getBaseHealthPoint());
     }
 
     @Test
     void testListCharacters() {
-        testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10, 10, 60), DnDCharacterDto.class);
-        testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test 2", 10, 10, 10, 60), DnDCharacterDto.class);
+        testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10,  60), DnDCharacterDto.class);
+        testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test 2", 10, 10,  60), DnDCharacterDto.class);
 
         List<DnDCharacterDto> employees = testRestTemplate.exchange("/api/characters",
                 HttpMethod.GET,
@@ -60,7 +59,7 @@ class DnDCharactersControllerIT {
 
     @Test
     void testUpdateCharacter() {
-        DnDCharacterDto dnDCharacterDto = testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10, 10, 60), DnDCharacterDto.class);
+        DnDCharacterDto dnDCharacterDto = testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10,  60), DnDCharacterDto.class);
         long id = dnDCharacterDto.getId();
         DnDCharacterDto dnDCharacterDto2 = testRestTemplate.getForObject("/api/characters/" + id, DnDCharacterDto.class);
         assertEquals("Test", dnDCharacterDto2.getName());
@@ -73,7 +72,7 @@ class DnDCharactersControllerIT {
 
     @Test
     void testDeleteCharacter() {
-        DnDCharacterDto dnDCharacterDto = testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10, 10, 60), DnDCharacterDto.class);
+        DnDCharacterDto dnDCharacterDto = testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10, 60), DnDCharacterDto.class);
         long id = dnDCharacterDto.getId();
         DnDCharacterDto dnDCharacterDto2 = testRestTemplate.getForObject("/api/characters/" + id, DnDCharacterDto.class);
         assertEquals("Test", dnDCharacterDto2.getName());
@@ -85,7 +84,7 @@ class DnDCharactersControllerIT {
 
     @Test
     void testCreateAndAssignItem() {
-        DnDCharacterDto dnDCharacterDto1 = testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10, 10, 60), DnDCharacterDto.class);
+        DnDCharacterDto dnDCharacterDto1 = testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10, 60), DnDCharacterDto.class);
         long id1 = dnDCharacterDto1.getId();
         DnDCharacterDto dnDCharacterDto2 = testRestTemplate.postForObject("/api/characters/" + id1 + "/items", new CreateItemCommand("Test Item", "Test Description"), DnDCharacterDto.class);
         List<ItemDto> items = dnDCharacterDto2.getItems();
@@ -94,7 +93,7 @@ class DnDCharactersControllerIT {
 
     @Test
     void testCreateAndAssignWeapon() {
-        DnDCharacterDto dnDCharacterDto1 = testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10, 10, 60), DnDCharacterDto.class);
+        DnDCharacterDto dnDCharacterDto1 = testRestTemplate.postForObject("/api/characters", new CreateDnDCharacterCommand("Test", 10, 10, 60), DnDCharacterDto.class);
         long id1 = dnDCharacterDto1.getId();
         DnDCharacterDto dnDCharacterDto2 = testRestTemplate.postForObject("/api/characters/" + id1 + "/weapons", new CreateWeaponCommand("Test Weapon 1", WeaponType.CRUSHING, 10, 10), DnDCharacterDto.class);
         WeaponDto weaponDto = dnDCharacterDto2.getWeapon();

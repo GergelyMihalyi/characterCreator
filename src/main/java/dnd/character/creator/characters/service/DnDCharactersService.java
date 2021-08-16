@@ -42,7 +42,7 @@ public class DnDCharactersService {
     }
 
     public DnDCharacterDto createCharacter(CreateDnDCharacterCommand command) {
-        DnDCharacter character = new DnDCharacter(command.getName(), command.getAge(), command.getArmorClass(), command.getBaseAttack(), command.getHealthPoint());
+        DnDCharacter character = new DnDCharacter(command.getName(), command.getAge(), command.getBaseAttackDamage(), command.getBaseHealthPoint());
         repository.save(character);
         return modelMapper.map(character, DnDCharacterDto.class);
     }

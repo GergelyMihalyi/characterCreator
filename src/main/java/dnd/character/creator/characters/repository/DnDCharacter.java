@@ -22,28 +22,36 @@ public class DnDCharacter {
     private Long id;
     private String name;
     private int age;
-    @Column(name = "armor_class")
-    private int armorClass;
-    @Column(name = "base_attack")
-    private int baseAttack;
-    @Column(name = "health_point")
-    private int healthPoint;
+    @Column(name = "base_attack_damage")
+    private int baseAttackDamage;
+    @Column(name = "base_health_point")
+    private int baseHealthPoint;
+    @Column(name = "actual_health_point")
+    private int actualHealthPoint;
+    @Column(name = "experience")
+    private int experience;
+    @Column(name = "level")
+    private int level;
     @ManyToOne
     @JoinColumn(name = "weapon_id", referencedColumnName = "id")
     private Weapon weapon;
     @ManyToMany(mappedBy = "characters")
     private List<Item> items = new ArrayList<>();
 
-    public DnDCharacter(String name, int age, int armorClass, int baseAttack, int healthPoint) {
+    public DnDCharacter(String name, int age, int baseAttackDamage, int baseHealthPoint) {
         this.name = name;
         this.age = age;
-        this.armorClass = armorClass;
-        this.baseAttack = baseAttack;
-        this.healthPoint = healthPoint;
+        this.baseAttackDamage = baseAttackDamage;
+        this.baseHealthPoint = baseHealthPoint;
+        this.actualHealthPoint = baseHealthPoint;
+        this.experience = 0;
+        this.level = 1;
     }
 
-    public DnDCharacter(String name, int healthPoint) {
+    public DnDCharacter(String name, int baseHealthPoint) {
         this.name = name;
-        this.healthPoint = healthPoint;
+        this.baseHealthPoint = baseHealthPoint;
+        this.experience = 0;
+        this.level = 1;
     }
 }
