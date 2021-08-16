@@ -1,12 +1,12 @@
 package dnd.character.creator.controller.character;
 
-import dnd.character.creator.dto.character.CreateDnDCharacterCommand;
-import dnd.character.creator.dto.character.DnDCharacterDto;
-import dnd.character.creator.dto.item.CreateItemCommand;
-import dnd.character.creator.dto.item.ItemDto;
-import dnd.character.creator.dto.weapon.CreateWeaponCommand;
-import dnd.character.creator.dto.weapon.WeaponDto;
-import dnd.character.creator.repository.weapon.WeaponType;
+import dnd.character.creator.characters.dto.CreateDnDCharacterCommand;
+import dnd.character.creator.characters.dto.DnDCharacterDto;
+import dnd.character.creator.items.dto.CreateItemCommand;
+import dnd.character.creator.items.dto.ItemDto;
+import dnd.character.creator.weapons.dto.CreateWeaponCommand;
+import dnd.character.creator.weapons.dto.WeaponDto;
+import dnd.character.creator.weapons.repository.WeaponType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,7 +1,7 @@
 package dnd.character.creator.controller.item;
 
-import dnd.character.creator.dto.item.CreateItemCommand;
-import dnd.character.creator.dto.item.ItemDto;
+import dnd.character.creator.items.dto.CreateItemCommand;
+import dnd.character.creator.items.dto.ItemDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,8 +1,8 @@
 package dnd.character.creator.controller.weapon;
 
-import dnd.character.creator.dto.weapon.CreateWeaponCommand;
-import dnd.character.creator.dto.weapon.WeaponDto;
-import dnd.character.creator.repository.weapon.WeaponType;
+import dnd.character.creator.weapons.dto.CreateWeaponCommand;
+import dnd.character.creator.weapons.dto.WeaponDto;
+import dnd.character.creator.weapons.repository.WeaponType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
