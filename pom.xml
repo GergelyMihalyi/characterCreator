@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>character.creator</groupId>
-	<artifactId>creator</artifactId>
+	<artifactId>character-creator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Character creator</name>
+	<name>character-creator</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>16</java.version>
