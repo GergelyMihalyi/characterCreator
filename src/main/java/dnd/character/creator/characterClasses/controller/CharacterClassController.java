@@ -5,6 +5,7 @@ import dnd.character.creator.characterClasses.dto.CreateCharacterClassCommand;
 import dnd.character.creator.characterClasses.dto.UpdateCharacterClassCommand;
 import dnd.character.creator.characterClasses.exceptions.CharacterClassNotFoundException;
 import dnd.character.creator.characterClasses.service.CharacterClassService;
+import dnd.character.creator.races.exceptions.RaceNotFoundException;
 import dnd.character.creator.weapons.exceptions.WeaponNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -70,7 +71,7 @@ public class CharacterClassController {
         service.deleteCharacterClass(id);
     }
 
-    @ExceptionHandler(WeaponNotFoundException.class)
+    @ExceptionHandler(CharacterClassNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Problem> handleNotFound(CharacterClassNotFoundException iae) {
         Problem problem = Problem.builder()
