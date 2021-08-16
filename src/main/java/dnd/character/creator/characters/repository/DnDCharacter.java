@@ -1,5 +1,6 @@
 package dnd.character.creator.characters.repository;
 
+import dnd.character.creator.characterClasses.repository.CharacterClass;
 import dnd.character.creator.items.repository.Item;
 import dnd.character.creator.weapons.repository.Weapon;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,9 @@ public class DnDCharacter {
     private Weapon weapon;
     @ManyToMany(mappedBy = "characters")
     private List<Item> items = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "class_id", referencedColumnName = "id")
+    private CharacterClass characterClass;
 
     public DnDCharacter(String name, int age, int baseAttackDamage, int baseHealthPoint) {
         this.name = name;
