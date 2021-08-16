@@ -9,6 +9,4 @@ public class UpdateCharacterCommand {
     @Name
     private String name;
     private int age;
-    private int baseAttackDamage;
-    private int baseHealthPoint;
 }

@@ -45,6 +45,7 @@ public class ItemService {
     public ItemDto updateItem(long id, UpdateItemCommand command) {
         Item item = repository.findById(id).orElseThrow(() -> new ItemNotFoundException("item not found"));
         item.setName(command.getName());
+        item.setDescription(command.getDescription());
         return modelMapper.map(item, ItemDto.class);
     }
 

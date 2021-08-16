@@ -57,9 +57,11 @@ class ItemControllerIT {
         assertEquals("Test Item 1", itemDto2.getName());
         Map<String, String> param = new HashMap<String, String>();
         param.put("name", "Test Item 2");
+        param.put("description", "Test Item 2");
         testRestTemplate.put("/api/items/" + id, param);
         ItemDto itemDto3 = testRestTemplate.getForObject("/api/items/" + id, ItemDto.class);
         assertEquals("Test Item 2", itemDto3.getName());
+        assertEquals("Test Item 2", itemDto3.getDescription());
     }
 
     @Test

@@ -30,8 +30,6 @@ public class DnDCharacter {
     private int baseHealthPoint;
     @Column(name = "actual_health_point")
     private int actualHealthPoint;
-    @Column(name = "experience")
-    private int experience;
     @Column(name = "level")
     private int level;
     @ManyToOne
