@@ -2,9 +2,6 @@ package dnd.character.creator.characterClasses.controller;
 
 import dnd.character.creator.characterClasses.dto.CharacterClassDto;
 import dnd.character.creator.characterClasses.dto.CreateCharacterClassCommand;
-import dnd.character.creator.weapons.dto.CreateWeaponCommand;
-import dnd.character.creator.weapons.dto.WeaponDto;
-import dnd.character.creator.weapons.repository.WeaponType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
